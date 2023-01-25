@@ -8,11 +8,13 @@ import json
 import numpy as np
 import os
 import soundfile as sf
-from constants import SR_AUDIO, MAX_AMP, SUBSET
+from constants import SR_AUDIO, MAX_AMP
 from paths import (udase_chime_5_audio_path, librispeech_path, 
-                   voicehome_path, reverberant_librichime_5_json_path, reverberant_librichime_5_audio_path)
+                   voicehome_path, reverberant_librichime_5_json_path, 
+                   reverberant_librichime_5_audio_path)
 from tqdm import tqdm
 import scipy as sp
+import argparse
 
 def compute_loudness(x):
     return 10*np.log10(np.sum((x - np.mean(x))**2))
@@ -108,14 +110,23 @@ def create_reverberant_speech(mix_infos, dtype, voicehome_path, librispeech_path
 
     return speech_sigs
 
-def main():
     
+if __name__ == "__main__":
+    
+    # parse arguments
+    parser = argparse.ArgumentParser(description="Revereberant LibriCHiME-5 generation", 
+                                     add_help=False)
+    parser.add_argument("--subset", type=str, default="dev", 
+                        help="Subset (`dev`/`eval`)")
+    args = parser.parse_args()
+    
+    print("Creating " + args.subset + " set")
     
     # paths
     dataset_json_path = output_path = os.path.join(reverberant_librichime_5_json_path, 
-                                                   SUBSET + '.json')
+                                                   args.subset + '.json')
     
-    output_path = os.path.join(reverberant_librichime_5_audio_path, SUBSET)
+    output_path = os.path.join(reverberant_librichime_5_audio_path, args.subset)
     
     # create output dir if necessary
     if not os.path.isdir(output_path):
@@ -136,7 +147,8 @@ def main():
         
         # read noise file
         noise_file = mix_infos['noise']['filename']
-        noise_path = os.path.join(udase_chime_5_audio_path, SUBSET, '0', noise_file+ '.wav')
+        noise_path = os.path.join(udase_chime_5_audio_path, args.subset, 
+                                  '0', noise_file+ '.wav')
         noise_sig, sr = sf.read(noise_path)
         if len(noise_sig.shape) == 2:
             noise_sig = noise_sig[:,1]
@@ -207,14 +219,14 @@ def main():
         if not os.path.isdir(os.path.join(output_path, str(mix_max_n_spk))):
             os.makedirs(os.path.join(output_path, str(mix_max_n_spk)))
         
-        output_mix_file = os.path.join(output_path, str(mix_max_n_spk), mix_name + '_mix.wav')
+        output_mix_file = os.path.join(output_path, str(mix_max_n_spk), 
+                                       mix_name + '_mix.wav')
         sf.write(output_mix_file, mix_sig, SR_AUDIO, 'PCM_16')
         
-        output_speech_file = os.path.join(output_path, str(mix_max_n_spk), mix_name + '_speech.wav')
+        output_speech_file = os.path.join(output_path, str(mix_max_n_spk), 
+                                          mix_name + '_speech.wav')
         sf.write(output_speech_file, speech_mix_sig, SR_AUDIO, 'PCM_16')
         
-        output_noise_file = os.path.join(output_path, str(mix_max_n_spk), mix_name + '_noise.wav')
+        output_noise_file = os.path.join(output_path, str(mix_max_n_spk), 
+                                         mix_name + '_noise.wav')
         sf.write(output_noise_file, noise_sig, SR_AUDIO, 'PCM_16')
-    
-if __name__ == "__main__":
-    main()

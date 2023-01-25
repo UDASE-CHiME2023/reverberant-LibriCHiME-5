@@ -46,7 +46,7 @@ conda activate CHiME
     - `voicehome_path` is the path to the VoiceHome dataset that you should have previously downloaded (see preparation section above).
     - `reverberant_librichime_5_json_path` is the path to the metadata of the reverberant LibriCHiME-5 dataset, you do not need to change it.
     - `reverberant_librichime_5_audio_path` is the path where you want to store the reverberant LibriCHiME-5 dataset.
-- Run `python create_audio_from_json.py`.
+- Run `python create_audio_from_json.py --subset dev`.
 
 For each set (only dev for the moment) of the reverberant LibriCHiME-5 dataset, we have three subsets dependending on the maximum number of simultaneously-active speakers (1, 2 or 3). These subsets are stored in separate subfolders whose name indicates the maximum number of simultaneously-active speakers.
 
