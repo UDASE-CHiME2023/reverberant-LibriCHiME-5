@@ -8,7 +8,7 @@ For the moment, this repository only contains the metadata to create the dev set
 
 You must first:
 
- - Follow the instruction of the [TBC] repository to extract the audio segments from the original CHiME-5 data. 
+ - Follow the instructions in [this repository](https://github.com/UDASE-CHiME2023/CHiME-5) to extract the audio segments from the original CHiME-5 data. 
     
  - Download the LibriSpeech [dev-clean](https://www.openslr.org/resources/12/dev-clean.tar.gz) and [test-clean](https://www.openslr.org/resources/12/test-clean.tar.gz) data. Put the data in a folder with the following structure:
 
@@ -31,8 +31,8 @@ You must first:
 
 ```
 # clone repository
-git clone [TBC]
-cd [TBC]
+git clone https://github.com/UDASE-CHiME2023/reverberant-LibriCHiME-5.git
+cd reverberant-LibriCHiME-5
 
 # activate CHiME environment
 conda activate CHiME
@@ -46,19 +46,23 @@ conda activate CHiME
     - `voicehome_path` is the path to the VoiceHome dataset that you should have previously downloaded (see preparation section above).
     - `reverberant_librichime_5_json_path` is the path to the metadata of the reverberant LibriCHiME-5 dataset, you do not need to change it.
     - `reverberant_librichime_5_audio_path` is the path where you want to store the reverberant LibriCHiME-5 dataset.
-- Run `python create_audio_from_json.py --subset dev`.
+- Run 
+    
+    `python create_audio_from_json.py --subset dev`
 
-For each set (only dev for the moment) of the reverberant LibriCHiME-5 dataset, we have three subsets dependending on the maximum number of simultaneously-active speakers (1, 2 or 3). These subsets are stored in separate subfolders whose name indicates the maximum number of simultaneously-active speakers.
+    `python create_audio_from_json.py --subset eval` (not yet available)
+
+For the dev and eval sets (only dev for the moment) of the reverberant LibriCHiME-5 dataset, we have three subsets dependending on the maximum number of simultaneously-active speakers (1, 2 or 3). These subsets are stored in separate subfolders whose name indicates the maximum number of simultaneously-active speakers.
 
 At the path defined by the variable `reverberant_librichime_5_audio_path` in `path.py`, you should obtain: 
 
 ```
 ├── dev
-│   ├── 1 (3561 files)
+│   ├── 1 (3 561 files)
 │   │   ├── [...]_mix.wav
 │   │   ├── [...]_noise.wav
 │   │   ├── [...]_speech.wav
-│   ├── 2 (1695 files)
+│   ├── 2 (1 695 files)
 │   │   ├── [...]_mix.wav
 │   │   ├── [...]_noise.wav
 │   │   ├── [...]_speech.wav
