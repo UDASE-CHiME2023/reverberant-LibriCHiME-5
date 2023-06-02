@@ -2,8 +2,6 @@
 
 This repository contains instructions for creating the reverberant LibriCHiME-5 dataset for the UDASE task of the CHiME-7 challenge.
 
-For the moment, this repository only contains the metadata to create the dev set.
-
 ## Preparation
 
 You must first:
@@ -50,9 +48,9 @@ conda activate CHiME
     
     `python create_audio_from_json.py --subset dev`
 
-    `python create_audio_from_json.py --subset eval` (not yet available)
+    `python create_audio_from_json.py --subset eval`
 
-For the dev and eval sets (only dev for the moment) of the reverberant LibriCHiME-5 dataset, we have three subsets dependending on the maximum number of simultaneously-active speakers (1, 2 or 3). These subsets are stored in separate subfolders whose name indicates the maximum number of simultaneously-active speakers.
+For the dev and eval sets of the reverberant LibriCHiME-5 dataset, we have three subsets dependending on the maximum number of simultaneously-active speakers (1, 2 or 3). These subsets are stored in separate subfolders whose name indicates the maximum number of simultaneously-active speakers.
 
 At the path defined by the variable `reverberant_librichime_5_audio_path` in `path.py`, you should obtain: 
 
@@ -67,6 +65,19 @@ At the path defined by the variable `reverberant_librichime_5_audio_path` in `pa
 │   │   ├── [...]_noise.wav
 │   │   ├── [...]_speech.wav
 │   ├── 3 (195 files)
+│   │   ├── [...]_mix.wav
+│   │   ├── [...]_noise.wav
+│   │   ├── [...]_speech.wav
+├── eval
+│   ├── 1 (4 182 files)
+│   │   ├── [...]_mix.wav
+│   │   ├── [...]_noise.wav
+│   │   ├── [...]_speech.wav
+│   ├── 2 (1 482 files)
+│   │   ├── [...]_mix.wav
+│   │   ├── [...]_noise.wav
+│   │   ├── [...]_speech.wav
+│   ├── 3 (192 files)
 │   │   ├── [...]_mix.wav
 │   │   ├── [...]_noise.wav
 │   │   ├── [...]_speech.wav
