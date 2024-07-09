@@ -4,6 +4,9 @@ This repository contains instructions for creating the reverberant LibriCHiME-5 
 
 The code to generate the metadata files is available in [this repository](https://github.com/UDASE-CHiME2023/reverberant-LibriCHiME-5-metadata).
 
+If you use this code in your research, please cite:
+> Leglaive, S., Borne, L., Tzinis, E., Sadeghi, M., Fraticelli, M., Wisdom, S., Pariente, M., Pressnitzer, D., & Hershey, J. R. (2023). The CHiME-7 UDASE task: Unsupervised domain adaptation for conversational speech enhancement. In 7th International Workshop on Speech Processing in Everyday Environments (CHiME).
+
 ## Preparation
 
 You must first:
